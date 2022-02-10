@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -21,6 +22,7 @@ import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.os.Build
+import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.*
@@ -36,6 +38,36 @@ class MapsFragment : Fragment() {
         googleMap.setOnMapLongClickListener { latLng ->
             addMarkerToArray(latLng)
         }
+        googleMap.setOnMarkerClickListener {marker->
+            AlertDialog.Builder(requireContext())
+                .setTitle("Выбор действия")
+                .setMessage("Выберете действие")
+                .setCancelable(false)
+                .setNegativeButton("Отмена") { dialog, _ ->
+                    dialog.cancel()
+                }
+                .setNeutralButton("Изменить маркер") { _, _ ->
+                    val b = AlertDialog.Builder(requireContext())
+                    val customLayout = layoutInflater.inflate(R.layout.change_marker, null);
+                    b.setView(customLayout)
+                    b.setPositiveButton("Ок"){_,_->
+                        val name = customLayout.findViewById<EditText>(R.id.name).text.toString()
+                        val latitude = customLayout.findViewById<EditText>(R.id.latitude).text.toString().toDouble()
+                        val longitude = customLayout.findViewById<EditText>(R.id.longitude).text.toString().toDouble()
+                        marker.remove()
+                        map.addMarker(MarkerOptions()
+                            .position(LatLng(latitude,longitude))
+                            .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_map_pin))
+                            .title(name))
+                    }
+                    b.create().show()
+                }
+                .setPositiveButton("Удалить маркер") { _, _ ->
+                    marker.remove()
+                }
+                .create()
+                .show()
+            true }
         activateMyLocation(googleMap)
     }
     override fun onCreateView(
