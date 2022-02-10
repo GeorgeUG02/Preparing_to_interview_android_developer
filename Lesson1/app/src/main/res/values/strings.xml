@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lesson1</string>
+    <string name="google_maps_key">AIzaSyBEbAw_yTrgTdehtWm6bJuNc7sVUgJjt2w</string>
+    <string name="button_add">Добавить</string>
 </resources>
