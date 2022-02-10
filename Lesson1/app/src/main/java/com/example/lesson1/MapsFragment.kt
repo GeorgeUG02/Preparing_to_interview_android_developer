@@ -50,6 +50,9 @@ class MapsFragment : Fragment() {
                     val b = AlertDialog.Builder(requireContext())
                     val customLayout = layoutInflater.inflate(R.layout.change_marker, null);
                     b.setView(customLayout)
+                    customLayout.findViewById<EditText>(R.id.name).setText(marker.title)
+                    customLayout.findViewById<EditText>(R.id.latitude).setText(marker.position.latitude.toString())
+                    customLayout.findViewById<EditText>(R.id.longitude).setText(marker.position.longitude.toString())
                     b.setPositiveButton("Ок"){_,_->
                         val name = customLayout.findViewById<EditText>(R.id.name).text.toString()
                         val latitude = customLayout.findViewById<EditText>(R.id.latitude).text.toString().toDouble()
