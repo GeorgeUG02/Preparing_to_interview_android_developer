@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private var isMoving: Boolean = false
@@ -19,6 +23,11 @@ class MainActivity : AppCompatActivity() {
             isMoving = true
             val anim = AnimationUtils.loadAnimation(this, R.anim.combination)
             it.startAnimation(anim)
+            val cs = CoroutineScope(Dispatchers.Default)
+            cs.launch {
+                delay(12000)
+                isMoving = false
+            }
         }
     }
 }
