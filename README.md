@@ -1,1 +1,0 @@
-# Preparing_to_interview_android_developer
