@@ -56,7 +56,7 @@ class MainFragment : Fragment() {
         adapterClasses1 = Classes1Adapter(lessons)
         binding?.classesList1?.adapter = adapterClasses1
         adapterHomework = HomeworkAdapter(homeworks)
-        binding?.classesList1?.adapter = adapterHomework
+        binding?.homeworkList?.adapter = adapterHomework
     }
 
     override fun onDestroy() {
