@@ -27,11 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val lm = LinearLayoutManager(recyclerView.context)
                 if (dy > 0) {
-                    visibleItemCount = lm.getChildCount()
-                    totalItemCount = lm.getItemCount()
-                    pastVisiblesItems = lm.findFirstVisibleItemPosition()
+                    visibleItemCount = (recyclerView.layoutManager as LinearLayoutManager).getChildCount()
+                    totalItemCount = (recyclerView.layoutManager as LinearLayoutManager).getItemCount()
+                    pastVisiblesItems = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                     if (loading) {
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
                             loading = false
