@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val lm = LinearLayoutManager(baseContext)
+                val lm = LinearLayoutManager(recyclerView.context)
                 if (dy > 0) {
                     visibleItemCount = lm.getChildCount()
                     totalItemCount = lm.getItemCount()
